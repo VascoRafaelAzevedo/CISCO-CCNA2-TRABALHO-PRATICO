@@ -119,13 +119,13 @@ interface GigabitEthernet0/2
 interface GigabitEthernet0/2.103
  no shut
  description CONNECTION TO RT1-ZG
- encapsulation dot1Q 102
+ encapsulation dot1Q 103
  ip address 10.0.0.2 255.255.255.252
 !
 interface GigabitEthernet0/2.203
  no shut
- description CONNECTION TO RT1-ST
- encapsulation dot1Q 103
+ description CONNECTION TO RT1-PL
+ encapsulation dot1Q 203
  ip address 10.0.0.9 255.255.255.252
 !
 interface Vlan1

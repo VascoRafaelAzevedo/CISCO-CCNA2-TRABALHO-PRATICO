@@ -121,7 +121,7 @@ interface GigabitEthernet0/2.102
 interface GigabitEthernet0/2.203
  no shut
  description CONNECTION TO RT1-ST
- encapsulation dot1Q 103
+ encapsulation dot1Q 203
  ip address 10.0.0.9 255.255.255.252
 !
 interface Vlan1
