@@ -59,30 +59,40 @@ interface vlan 5
  description VLAN APs
  ip address 172.20.7.93 255.255.255.224
  standby 5 ip 172.20.7.94
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 6
  standby version 2
  description VLAN MANAGEMENT
  ip address 172.20.7.29 255.255.255.224
  standby 6 ip 172.20.7.30
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 10
  standby version 2
  description VLAN SERVERS
  ip address 172.20.7.61 255.255.255.224
  standby 10 ip 172.20.7.62
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 20
  standby version 2
  description VLAN ADMINISTRATION
  ip address 172.20.6.253 255.255.255.0
  standby 20 ip 172.20.6.254
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 30
  standby version 2
  description VLAN STAFF
  ip address 172.20.4.252 255.255.255.0
  standby 30 ip 172.20.4.254
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 40
  standby version 2
@@ -91,6 +101,8 @@ interface vlan 40
  standby 40 ip 172.20.3.254
  standby 40 priority 110
  standby 40 preempt
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 50
  standby version 2
@@ -99,6 +111,8 @@ interface vlan 50
  standby 50 ip 172.20.1.254
  standby 50 priority 110
  standby 50 preempt
+ ip helper-address 172.20.7.33
+
 !
 interface vlan 60
  standby version 2
@@ -107,10 +121,12 @@ interface vlan 60
  standby 60 ip 172.20.5.254
  standby 60 priority 110
  standby 60 preempt
+ ip helper-address 172.20.7.33
+
 !
 interface Port-channel1
  switchport trunk native vlan 7
- switchport trunk allowed vlan 1-98,100-1005
+ switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
  switchport mode trunk
  ip dhcp snooping trust
  description EtherChannel Port
@@ -127,7 +143,7 @@ interface GigabitEthernet1/0/1
 interface GigabitEthernet1/0/2
  channel-group 1 mode on
  switchport trunk native vlan 7
- switchport trunk allowed vlan 1-98,100-1005
+ switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
  switchport mode trunk
  ip dhcp snooping trust
   description To MLS1-Zg 
@@ -136,7 +152,7 @@ interface GigabitEthernet1/0/2
 interface GigabitEthernet1/0/3
  channel-group 1 mode on
  switchport trunk native vlan 7
- switchport trunk allowed vlan 1-98,100-1005
+ switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
  switchport mode trunk
  ip dhcp snooping trust
  description To MLS1-Zg 
@@ -144,7 +160,7 @@ interface GigabitEthernet1/0/3
 !
 interface GigabitEthernet1/0/4
  switchport trunk native vlan 7
- switchport trunk allowed vlan 1-98,100-1005
+ switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
  switchport mode trunk
  ip dhcp snooping trust
  description To SW1-Zg 
@@ -152,7 +168,7 @@ interface GigabitEthernet1/0/4
 !
 interface GigabitEthernet1/0/5
  switchport trunk native vlan 7
- switchport trunk allowed vlan 1-98,100-1005
+ switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
  switchport mode trunk
  ip dhcp snooping trust
  description To SW2-Zg 
@@ -163,7 +179,6 @@ int range g1/0/6-24, g1/1/1-4
  switchport access vlan 99
  switchport mode access
  ip dhcp snooping limit rate 5
- switchport nonegotiate
  shutdown
 !
 !

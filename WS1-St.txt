@@ -1,6 +1,6 @@
 service password-encryption
 !
-hostname SW1-Zg
+hostname SW1-Pl
 !
 login block-for 300 attempts 3 within 120
 !
@@ -49,49 +49,45 @@ spanning-tree mode rapid-pvst
 spanning-tree portfast default
 spanning-tree portfast bpduguard default
 !
-int range f0/1-5
+int range f0/1-10
  ip dhcp snooping trust
  switchport mode access
- switchport access vlan 10
- ip arp inspection vlan 10
+ switchport access vlan 20
+ switchport voice vlan 40
+ ip arp inspection vlan 20
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
  switchport port-security aging time 5
  switchport port-security aging type inactivity
 !
-int range f0/6-13
- ip dhcp snooping limit rate 5
- switchport mode access
- ip arp inspection vlan 20
- switchport access vlan 20
- switchport voice vlan 40
- switchport port-security
- switchport port-security maximum 5
- switchport port-security violation shutdown
- switchport port-security aging time 5
-!
-int range f0/14-20
+int range f0/2-15
  ip dhcp snooping limit rate 5
  switchport mode access
  switchport access vlan 30
- switchport voice vlan 40
  ip arp inspection vlan 30
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
  switchport port-security aging time 5
- switchport port-security aging type inactivity
 !
-interface range GigabitEthernet0/1-2
-switchport encapsulation dot1q
+int range f0/1
+ switchport encapsulation dot1q
  switchport mode trunk
  switchport trunk native vlan 7
- switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
+ switchport trunk allowed vlan 5,6,30,50,60
  ip dhcp snooping trust
  switchport nonegotiate
 !
-int range f0/21-24
+int range f0/21-22
+ switchport encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 5
+ switchport trunk allowed vlan 5,50,60
+ ip dhcp snooping trust
+ switchport nonegotiate
+!
+int range f0/24, g0/1-2
  description Closed
  switchport access vlan 99
  switchport mode access
@@ -100,7 +96,7 @@ int range f0/21-24
  ip dhcp snooping limit rate 5
 !
 int vlan 6
- ip add 172.20.7.27 255.255.255.224
+ ip add 172.20.11.233 255.255.255.248
  no shut
 !
 line con 0
@@ -108,20 +104,8 @@ exec-timeout 0 30
  password classclass
  login
 !
-line vty 1 15
+line vty 0 15
  exec-timeout 0 30
  login local
  transport input ssh
 !
-
-
-
-
-
-
-
-
-
-
-
-
