@@ -116,6 +116,7 @@ interface vlan 60
  standby 60 ip 172.20.5.254
 !
 interface Port-channel1
+switchport encapsulation dot1q
  switchport trunk native vlan 7
  switchport trunk allowed vlan 1-98,100-1005
  switchport mode trunk
@@ -132,6 +133,7 @@ interface GigabitEthernet1/0/1
  description To RT1-Zg 
 !
 interface GigabitEthernet1/0/2
+switchport encapsulation dot1q
  channel-group 1 mode on
  switchport trunk native vlan 7
  switchport trunk allowed vlan 1-98,100-1005
@@ -141,6 +143,7 @@ interface GigabitEthernet1/0/2
   description To MLS2-Zg 
 !
 interface GigabitEthernet1/0/3
+switchport encapsulation dot1q
  channel-group 1 mode on
  switchport trunk native vlan 7
  switchport trunk allowed vlan 1-98,100-1005
@@ -150,6 +153,7 @@ interface GigabitEthernet1/0/3
  description To MLS2-Zg 
 !
 interface GigabitEthernet1/0/4
+switchport encapsulation dot1q
  switchport trunk native vlan 7
  switchport trunk allowed vlan 1-98,100-1005
  switchport mode trunk
@@ -158,6 +162,7 @@ interface GigabitEthernet1/0/4
  description To SW2-Zg 
 !
 interface GigabitEthernet1/0/5
+switchport encapsulation dot1qs
  switchport trunk native vlan 7
  switchport trunk allowed vlan 1-98,100-1005
  switchport mode trunk
