@@ -1,0 +1,101 @@
+service password-encryption
+!
+hostname SW0
+!
+login block-for 300 attempts 3 within 120
+!
+enable secret classclass
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+username cisco password classclass
+!
+!
+crypto key generate rsa modulus 2048
+ip ssh version 2
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
+ip dhcp snooping
+!
+vlan 102 
+name ZG-PL
+vlan 203 
+name PL-ST
+vlan 103
+name ZG-ST
+vlan 7 
+name NATIVE
+!
+exit
+conf t
+!
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+!
+int f0/1
+ ip dhcp snooping trust
+ switchport mode access
+ switchport access vlan 10
+ ip arp inspection vlan 10
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security violation shutdown
+ switchport port-security aging time 5
+ switchport port-security aging type inactivity
+!
+int range f0/6-13
+ ip dhcp snooping limit rate 5
+ switchport mode access
+ ip arp inspection vlan 20
+ switchport access vlan 20
+ switchport voice vlan 40
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security violation shutdown
+ switchport port-security aging time 5
+!
+interface f0/1
+switchport encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 102,203
+ ip dhcp snooping trust
+ switchport nonegotiate
+!
+interface g0/2
+switchport encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 102,103
+ ip dhcp snooping trust
+ switchport nonegotiate
+!
+interface f0/2
+switchport encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 103,203
+ ip dhcp snooping trust
+ switchport nonegotiate
+!
+int vlan 6
+ ip add 172.20.7.27 255.255.255.224
+ no shut
+!
+banner motd ^C SW0(Authorized Access Only)^^C
+!
+line con 0
+exec-timeout 0 30
+ password classclass
+ login
+!
+line vty 1 15
+ exec-timeout 0 30
+ login local
+ transport input ssh
+!
