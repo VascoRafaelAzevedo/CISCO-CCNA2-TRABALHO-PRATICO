@@ -103,6 +103,8 @@ int vlan 6
  ip add 172.20.7.27 255.255.255.224
  no shut
 !
+banner motd ^C SW1-ZG(Authorized Access Only)^^C
+!
 line con 0
 exec-timeout 0 30
  password classclass

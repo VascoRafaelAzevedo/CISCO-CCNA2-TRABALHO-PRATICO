@@ -1,6 +1,6 @@
 service password-encryption
 !
-hostname SW1-Pl
+hostname SW1-St
 !
 login block-for 300 attempts 3 within 120
 !
@@ -98,6 +98,8 @@ int range f0/24, g0/1-2
 int vlan 6
  ip add 172.20.11.233 255.255.255.248
  no shut
+!
+banner motd ^C SW1-ST(Authorized Access Only)^^C
 !
 line con 0
 exec-timeout 0 30
