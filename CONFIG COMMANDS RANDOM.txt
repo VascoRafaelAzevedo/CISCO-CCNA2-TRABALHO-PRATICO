@@ -1,0 +1,76 @@
+no ip domain-lookup
+hostname AAAAAAAAAAAAAAAAA
+ip domain-name isepacademy.ccna.itn.com
+service password-encryption
+security passwords min-length 10
+line console 0
+password classclass
+login
+exit
+enable secret classclass
+username cisco privilege 15 secret classclass
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+login local
+transport input ssh
+exec-timeout 0 30
+exit
+login block-for 300 attempts 3 within 120
+banner motd # APENAS ACCESSO AUTORIZADO #
+
+
+
+
+DHCP CONFIGURAR
+
+configure terminal
+!
+ip dhcp excluded-address 192.168.1.1 192.168.1.10
+!
+ip dhcp pool VLAN_MANAGEMENTE
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ domain-name isepacademy.ccna.itn.com
+!
+!
+ip dhcp pool VLAN_MANAGEMENTE
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ domain-name isepacademy.ccna.itn.com
+!
+!
+ip dhcp pool VLAN_MANAGEMENTE
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ domain-name isepacademy.ccna.itn.com
+!
+!
+ip dhcp pool VLAN_MANAGEMENTE
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ domain-name isepacademy.ccna.itn.com
+!
+!
+ip dhcp pool VLAN_MANAGEMENTE
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ domain-name isepacademy.ccna.itn.com
+!
+!
+ip dhcp pool VLAN_MANAGEMENTE
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ domain-name isepacademy.ccna.itn.com
+!
+end
+
+
+
+
+
+
+
+
+

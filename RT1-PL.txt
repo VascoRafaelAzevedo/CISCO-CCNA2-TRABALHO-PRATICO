@@ -1,5 +1,3 @@
-RT1-PL
-
 Current configuration : 2297 bytes
 !
 version 15.1
@@ -52,14 +50,17 @@ spanning-tree mode pvst
 !
 !
 interface Loopback0
+ no shut
  description ENGENEERING
  ip address 172.20.8.254 255.255.255.0
 !
 interface Loopback1
+ no shut
  description DESIGN
  ip address 172.20.11.94 255.255.255.224
 !
 interface Loopback2
+ no shut
  description COMMUNICATION
  ip address 172.20.10.126 255.255.255.128
 !
@@ -70,48 +71,55 @@ interface GigabitEthernet0/0
  shutdown
 !
 interface GigabitEthernet0/1
+ no shut
  no ip address
  duplex auto
  speed auto
- shutdown
 !
 interface GigabitEthernet0/1.5
+ no shut
  description APs
  encapsulation dot1Q 5
  ip address 172.20.11.102 255.255.255.248
 !
 interface GigabitEthernet0/1.6
+ no shut
  description MANAGEMENT
  encapsulation dot1Q 6
  ip address 172.20.11.110 255.255.255.248
 !
 interface GigabitEthernet0/1.30
+ no shut
  description STAFF
  encapsulation dot1Q 30
  ip address 172.20.10.254 255.255.255.128
 !
 interface GigabitEthernet0/1.50
+ no shut
  description WIRELESS
  encapsulation dot1Q 50
  ip address 172.20.9.254 255.255.255.0
 !
 interface GigabitEthernet0/1.60
+ no shut
  description GUESTS
  encapsulation dot1Q 60
  ip address 172.20.11.62 255.255.255.192
 !
 interface GigabitEthernet0/2
+ no shut
  no ip address
  duplex auto
  speed auto
- shutdown
 !
 interface GigabitEthernet0/2.102
+ no shut
  description CONNECTION TO RT1-ZG
  encapsulation dot1Q 102
  ip address 10.0.0.2 255.255.255.252
 !
 interface GigabitEthernet0/2.203
+ no shut
  description CONNECTION TO RT1-ST
  encapsulation dot1Q 103
  ip address 10.0.0.9 255.255.255.252
@@ -126,6 +134,30 @@ ip route 172.20.12.0 255.255.254.0 10.0.0.1 2
 ip route 172.20.0.0 255.255.248.0 10.0.0.1 
 ip route 172.20.0.0 255.255.248.0 10.0.0.11 2
 !
+ip dhcp excluded-address 172.20.10.254
+ip dhcp excluded-address 172.20.10.255
+ip dhcp excluded-address 172.20.9.254
+ip dhcp excluded-address 172.20.9.255
+ip dhcp excluded-address 172.20.11.62
+ip dhcp excluded-address 172.20.11.63
+ip dhcp excluded-address 172.20.10.128
+ip dhcp excluded-address 172.20.9.0
+ip dhcp excluded-address 172.20.11.0
+!
+ip dhcp pool VLAN30
+ network 172.20.10.128 255.255.255.128
+ default-router 172.20.10.254
+ domain-name isepacademy.ccna.itn.com
+!
+ip dhcp pool VLAN50
+ network 172.20.9.0 255.255.255.0
+ default-router 172.20.9.254
+ domain-name isepacademy.ccna.itn.com
+!
+ip dhcp pool VLAN60
+ network 172.20.11.0 255.255.255.192
+ default-router 172.20.11.62
+ domain-name isepacademy.ccna.itn.com
 !
 ip flow-export version 9
 !
