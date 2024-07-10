@@ -66,7 +66,7 @@ interface Loopback1
 interface Loopback2
  no shut
  description COMMUNICATION
- ip address 172.20.10.190 255.255.255.192
+ ip address 172.20.13.190 255.255.255.192
 !
 interface GigabitEthernet0/0
  no ip address
@@ -120,13 +120,13 @@ interface GigabitEthernet0/2.103
  no shut
  description CONNECTION TO RT1-ZG
  encapsulation dot1Q 103
- ip address 10.0.0.2 255.255.255.252
+ ip address 10.0.0.6 255.255.255.252
 !
 interface GigabitEthernet0/2.203
  no shut
  description CONNECTION TO RT1-PL
  encapsulation dot1Q 203
- ip address 10.0.0.9 255.255.255.252
+ ip address 10.0.0.10 255.255.255.252
 !
 interface Vlan1
  no ip address
