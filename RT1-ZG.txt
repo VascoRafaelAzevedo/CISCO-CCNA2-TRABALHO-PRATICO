@@ -38,11 +38,11 @@ license udi pid CISCO2911/K9 sn FTX15241T5I-
 !
 !
 !
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
 crypto key generate rsa
 1024
 ip ssh version 2
-no ip domain-lookup
-ip domain-name isepacademy.ccna.itn.com
 !
 !
 spanning-tree mode pvst
@@ -100,10 +100,16 @@ ip route 172.20.8.0 255.255.252.0 10.0.0.2
 ip route 172.20.8.0 255.255.252.0 10.0.0.6 2
 !
 !
-ipv6 route 2001:C:: /61 FE80::8 g0/1
-ipv6 route 2001:B:: /61 FE80::9 g0/1
-ipv6 route 2001:C:: /61 FE80::9 g0/1 2
-ipv6 route 2001:B:: /61 FE80::8 g0/1 2
+
+
+
+
+
+
+ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::8
+ipv6 route 2001:B::/61 GigabitEthernet0/1 FE80::9 
+ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::9 2
+ipv6 route 2001:B::/61 GigabitEthernet0/1 FE80::8 2
 !
 !IP ROUTES PARA VLANS E MLS
 !
@@ -114,19 +120,19 @@ ip route 172.20.7.32 255.255.255.224 172.20.7.98
 ip route 172.20.6.0  255.255.255.0   172.20.7.98
 ip route 172.20.4.0  255.255.255.0   172.20.7.98
 !
-ipv6 route 2001:A:0:7:: /64 FE80::2 g0/0
-ipv6 route 2001:A:0:6:: /64 FE80::2 g0/0
-ipv6 route 2001:A:0:5:: /64 FE80::2 g0/0
-ipv6 route 2001:A::     /64 FE80::2 g0/0
-ipv6 route 2001:A:0:1:: /64 FE80::2 g0/0
+ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::2 
+ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::2 
+ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::2 
+ipv6 route 2001:A::/64     GigabitEthernet0/0 FE80::2 
+ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::2 
 !
 ip route 172.20.2.0  255.255.254.0   172.20.7.98 2
 ip route 172.20.0.0  255.255.254.0   172.20.7.98 2
 ip route 172.20.5.0  255.255.255.0   172.20.7.98 2
 !
-ipv6 route 2001:A:0:2:: /64 FE80::2 g0/1 2
-ipv6 route 2001:A:0:3:: /64 FE80::2 g0/1 2
-ipv6 route 2001:A:0:4:: /64 FE80::2 g0/1 2
+ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::2  2
+ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::2  2
+ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::2  2
 !
 !MLS2
 ip route 172.20.7.64 255.255.255.224 172.20.7.102 2
@@ -135,19 +141,19 @@ ip route 172.20.7.32  255.255.255.224 172.20.7.102 2
 ip route 172.20.6.0   255.255.255.0   172.20.7.102 2
 ip route 172.20.4.0   255.255.255.0   172.20.7.102 2
 !
-ipv6 route 2001:A:0:7:: /64 FE80::4 g0/0 2
-ipv6 route 2001:A:0:6:: /64 FE80::4 g0/0 2
-ipv6 route 2001:A:0:5:: /64 FE80::4 g0/0 2
-ipv6 route 2001:A::     /64 FE80::4 g0/0 2 
-ipv6 route 2001:A:0:1:: /64 FE80::4 g0/0 2
+ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A::/64     GigabitEthernet0/0 FE80::4 2 
+ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::4 2
 !
 ip route 172.20.2.0   255.255.254.0   172.20.7.102 
 ip route 172.20.0.0   255.255.254.0   172.20.7.102
 ip route 172.20.5.0   255.255.255.0   172.20.7.102
 !
-ipv6 route 2001:A:0:2:: /64 FE80::4 g0/1 2
-ipv6 route 2001:A:0:3:: /64 FE80::4 g0/1 2
-ipv6 route 2001:A:0:4:: /64 FE80::4 g0/1 2
+ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::4 2
+ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::4 2
+ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::4 2
 !
 ip flow-export version 9
 !

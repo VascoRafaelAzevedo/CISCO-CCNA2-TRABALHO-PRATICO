@@ -35,11 +35,12 @@ license udi pid CISCO2911/K9 sn FTX152473MJ-
 !
 !
 !
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
 crypto key generate rsa
 1024
 ip ssh version 2
-no ip domain-lookup
-ip domain-name isepacademy.ccna.itn.com
+
 !
 !
 spanning-tree mode pvst
@@ -142,10 +143,10 @@ ip route 172.20.12.0 255.255.254.0 10.0.0.1 2
 ip route 172.20.0.0 255.255.248.0 10.0.0.1 
 ip route 172.20.0.0 255.255.248.0 10.0.0.10 2
 !
-ipv6 route 2001:A:: /61 FE80::7 g0/1
-ipv6 route 2001:C:: /61 FE80::9 g0/1
-ipv6 route 2001:A:: /61 FE80::9 g0/1 2
-ipv6 route 2001:C:: /61 FE80::7 g0/1 2
+ipv6 route 2001:A::/61 GigabitEthernet0/1 FE80::7 
+ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::9 
+ipv6 route 2001:A::/61 GigabitEthernet0/1 FE80::9 2
+ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::7 2
 !
 ip dhcp excluded-address 172.20.10.254
 ip dhcp excluded-address 172.20.10.255
