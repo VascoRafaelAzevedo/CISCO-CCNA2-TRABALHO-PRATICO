@@ -18,7 +18,7 @@ enable secret classclass
 !
 !
 ip cef
-no ipv6 cef
+ipv6 unicast-routing
 !
 !
 !
@@ -141,6 +141,11 @@ ip route 172.20.12.0 255.255.254.0 10.0.0.10
 ip route 172.20.12.0 255.255.254.0 10.0.0.1 2
 ip route 172.20.0.0 255.255.248.0 10.0.0.1 
 ip route 172.20.0.0 255.255.248.0 10.0.0.10 2
+!
+ipv6 route 2001:A:: /61 FE80::7 g0/1
+ipv6 route 2001:C:: /61 FE80::9 g0/1
+ipv6 route 2001:A:: /61 FE80::9 g0/1 2
+ipv6 route 2001:C:: /61 FE80::7 g0/1 2
 !
 ip dhcp excluded-address 172.20.10.254
 ip dhcp excluded-address 172.20.10.255
