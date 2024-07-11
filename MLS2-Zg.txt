@@ -89,7 +89,7 @@ interface vlan 20
 interface vlan 30
  standby version 2
  description VLAN STAFF
- ip address 172.20.4.252 255.255.255.0
+ ip address 172.20.4.253 255.255.255.0
  standby 30 ip 172.20.4.254
  ip helper-address 172.20.7.33
 
