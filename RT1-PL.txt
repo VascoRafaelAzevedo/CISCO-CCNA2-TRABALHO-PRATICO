@@ -53,16 +53,19 @@ interface Loopback0
  no shut
  description ENGENEERING
  ip address 172.20.8.254 255.255.255.0
+ ip address 2001:B::1 /64
 !
 interface Loopback1
  no shut
  description DESIGN
  ip address 172.20.11.94 255.255.255.224
+ ipv6 address 2001:B:0:1::1 /64
 !
 interface Loopback2
  no shut
  description COMMUNICATION
  ip address 172.20.10.126 255.255.255.128
+ ipv6 address 2001:B:0:2::1 /64
 !
 interface GigabitEthernet0/0
  no ip address
@@ -81,34 +84,39 @@ interface GigabitEthernet0/1.5
  description APs
  encapsulation dot1Q 5
  ip address 172.20.11.102 255.255.255.248
+ ipv6 address 2001:B:0:6::3 /64
 !
 interface GigabitEthernet0/1.6
  no shut
  description MANAGEMENT
  encapsulation dot1Q 6
  ip address 172.20.11.110 255.255.255.248
+ ipv6 address 2001:B:0:7::3 /64
 !
 interface GigabitEthernet0/1.30
  no shut
  description STAFF
  encapsulation dot1Q 30
  ip address 172.20.10.254 255.255.255.128
+ ipv6 address 2001:B:0:3::3 /64
 !
 interface GigabitEthernet0/1.50
  no shut
  description WIRELESS
  encapsulation dot1Q 50
  ip address 172.20.9.254 255.255.255.0
+ ipv6 address 2001:B:0:4::3 /64
 !
 interface GigabitEthernet0/1.60
  no shut
  description GUESTS
  encapsulation dot1Q 60
  ip address 172.20.11.62 255.255.255.192
+ ipv6 address 2001:B:0:5::3 /64
 !
 interface GigabitEthernet0/2
  no shut
- no ip address
+ ipv6 address FE80::8 link-local
  duplex auto
  speed auto
 !

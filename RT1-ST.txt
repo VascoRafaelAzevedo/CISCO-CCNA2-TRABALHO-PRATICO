@@ -57,16 +57,19 @@ interface Loopback0
  no shut
  description MULTIMEDIA
  ip address 172.20.13.62 255.255.255.192
+ ipv6 address 2001:C::1 /64
 !
 interface Loopback1
  no shut
  description DESIGN
  ip address 172.20.13.126 255.255.255.192
+ ipv6 address 2001:C:0:1::1 /64
 !
 interface Loopback2
  no shut
  description COMMUNICATION
  ip address 172.20.13.190 255.255.255.192
+ ipv6 address 2001:C:0:2::1 /64
 !
 interface GigabitEthernet0/0
  no ip address
@@ -85,34 +88,39 @@ interface GigabitEthernet0/1.5
  description APs
  encapsulation dot1Q 5
  ip address 172.20.13.230 255.255.255.248
+ ipv6 address 2001:C:0:6::3 /64
 !
 interface GigabitEthernet0/1.6
  no shut
  description MANAGEMENT
  encapsulation dot1Q 6
  ip address 172.20.13.238 255.255.255.248
+ ipv6 address 2001:C:0:7::3 /64
 !
 interface GigabitEthernet0/1.30
  no shut
  description STAFF
  encapsulation dot1Q 30
  ip address 172.20.12.126 255.255.255.128
+ ipv6 address 2001:C:0:3::3 /64
 !
 interface GigabitEthernet0/1.50
  no shut
  description WIRELESS
  encapsulation dot1Q 50
  ip address 172.20.12.254 255.255.255.128
+ ipv6 address 2001:C:0:4::3 /64
 !
 interface GigabitEthernet0/1.60
  no shut
  description GUESTS
  encapsulation dot1Q 60
  ip address 172.20.13.222 255.255.255.224
+ ipv6 address 2001:C:0:5::3 /64
 !
 interface GigabitEthernet0/2
  no shut
- no ip address
+ ipv6 address FE80::9 link-local
  duplex auto
  speed auto
 !
@@ -133,11 +141,15 @@ interface Vlan1
  shutdown
 !
 ip classless
+!
+!IPV4 ROTAS
+!
 ip route 172.20.8.0 255.255.252.0 10.0.0.9
 ip route 172.20.8.0 255.255.252.0 10.0.0.5 2
 ip route 172.20.0.0 255.255.248.0 10.0.0.5 
 ip route 172.20.0.0 255.255.248.0 10.0.0.9 2
 !
+!IPV6 ROTAS
 !
 ip dhcp excluded-address 172.20.12.126
 ip dhcp excluded-address 172.20.12.127
