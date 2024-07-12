@@ -19,7 +19,7 @@ crypto key generate rsa modulus 2048
 ip ssh version 2
 no ip domain-lookup
 ip domain-name isepacademy.ccna.itn.com
-ip dhcp snooping
+sdm prefer dual-ipv4-and-ipv6 default
 !
 vlan 5 
 name APs
@@ -48,48 +48,51 @@ conf t
 spanning-tree mode rapid-pvst
 spanning-tree portfast default
 spanning-tree portfast bpduguard default
+ip default-gateway 172.20.7.30
+ip dhcp snooping
+ip dhcp snooping information option allow-untrusted
+ip dhcp relay information trust-all
+ip arp inspection vlan 10,20,30
 !
 int range f0/1-5
- ip dhcp snooping trust
  switchport mode access
  switchport access vlan 10
- ip arp inspection vlan 10
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
  switchport port-security aging time 5
- switchport port-security aging type inactivity
+ switchport snooping trust
 !
 int range f0/6-13
- ip dhcp snooping limit rate 5
  switchport mode access
- ip arp inspection vlan 20
  switchport access vlan 20
  switchport voice vlan 40
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
  switchport port-security aging time 5
+  switchport snooping trust
+
 !
 int range f0/14-20
- ip dhcp snooping limit rate 5
  switchport mode access
  switchport access vlan 30
  switchport voice vlan 40
- ip arp inspection vlan 30
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
  switchport port-security aging time 5
- switchport port-security aging type inactivity
+  switchport snooping trust
+
 !
 interface range GigabitEthernet0/1-2
 switchport encapsulation dot1q
  switchport mode trunk
  switchport trunk native vlan 7
  switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
- ip dhcp snooping trust
  switchport nonegotiate
+  switchport snooping trust
+
 !
 int range f0/21-24
  description Closed
@@ -97,10 +100,16 @@ int range f0/21-24
  switchport mode access
  shutdown
  switchport nonegotiate
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security violation shutdown
+ switchport port-security aging time 5
  ip dhcp snooping limit rate 5
 !
 int vlan 6
+ipv6 enable
  ip add 172.20.7.27 255.255.255.224
+ ipv6 add 2001:a:0:5::1/64
  no shut
 !
 banner motd ^C SW1-ZG(Authorized Access Only)^^C
@@ -110,7 +119,7 @@ exec-timeout 0 30
  password classclass
  login
 !
-line vty 1 15
+line vty 0 15
  exec-timeout 0 30
  login local
  transport input ssh

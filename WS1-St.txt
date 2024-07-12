@@ -48,6 +48,7 @@ conf t
 spanning-tree mode rapid-pvst
 spanning-tree portfast default
 spanning-tree portfast bpduguard default
+sdm prefer dual-ipv4-and-ipv6 default
 !
 int range f0/1-10
  ip dhcp snooping trust
@@ -97,6 +98,8 @@ int range f0/24, g0/1-2
 !
 int vlan 6
  ip add 172.20.11.233 255.255.255.248
+  ipv6 add 2001:c:0:7::1
+
  no shut
 !
 banner motd ^C SW1-ST(Authorized Access Only)^^C
