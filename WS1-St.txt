@@ -20,6 +20,7 @@ ip ssh version 2
 no ip domain-lookup
 ip domain-name isepacademy.ccna.itn.com
 ip dhcp snooping
+ip arp inspection vlan 10,20,30
 !
 vlan 5 
 name APs
@@ -55,7 +56,6 @@ int range f0/1-10
  switchport mode access
  switchport access vlan 20
  switchport voice vlan 40
- ip arp inspection vlan 20
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
@@ -66,7 +66,6 @@ int range f0/2-15
  ip dhcp snooping limit rate 5
  switchport mode access
  switchport access vlan 30
- ip arp inspection vlan 30
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
