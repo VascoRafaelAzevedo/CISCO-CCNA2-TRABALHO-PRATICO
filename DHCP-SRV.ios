@@ -34,6 +34,25 @@ ip dhcp pool VLAN60
  network 172.20.5.0 255.255.255.0
  default-router 172.20.5.254
 !
+ipv6 dhcp pool VLAN20_IPV6
+    address prefix 2001:a::/64
+    domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN30_IPV6
+    address prefix 2001:a:0:1::/64
+    domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN40_IPV6
+    address prefix 2001:a:0:2::/64
+    domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN50_IPV6
+    address prefix 2001:a:0:3::/64
+    domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN60_IPV6
+    address prefix 2001:a:0:4::/64
+    domain-name isepacademy.ccna.itn.com
 !
 !
 ip cef
@@ -74,6 +93,15 @@ interface GigabitEthernet0/0
 !
 interface GigabitEthernet0/1
  ip address 172.20.7.33 255.255.255.224
+ ipv6 address 2001:a:0:6::4/64
+ ipv6 enable
+    ipv6 nd managed-config-flag
+    ipv6 nd prefix default no-autoconfig
+    ipv6 dhcp server VLAN20_IPV6
+    ipv6 dhcp server VLAN30_IPV6
+    ipv6 dhcp server VLAN40_IPV6
+    ipv6 dhcp server VLAN50_IPV6
+    ipv6 dhcp server VLAN60_IPV6
  duplex auto
  speed auto
 no shut
