@@ -21,6 +21,7 @@ no ip domain-lookup
 ip domain-name isepacademy.ccna.itn.com
 ip dhcp snooping
 ip arp inspection vlan 10,20,30
+ip default-gateway 172.20.11.110
 !
 vlan 5 
 name APs
@@ -55,7 +56,6 @@ int range f0/1-10
  ip dhcp snooping trust
  switchport mode access
  switchport access vlan 20
- switchport voice vlan 40
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
@@ -66,6 +66,8 @@ int range f0/2-15
  ip dhcp snooping limit rate 5
  switchport mode access
  switchport access vlan 30
+ ip dhcp snooping trust
+ ip arp inspection trust
  switchport port-security
  switchport port-security maximum 5
  switchport port-security violation shutdown
@@ -77,6 +79,7 @@ int range f0/1
  switchport trunk native vlan 7
  switchport trunk allowed vlan 5,6,30,50,60
  ip dhcp snooping trust
+ ip arp inspection t
  switchport nonegotiate
 !
 int range f0/21-22
@@ -85,6 +88,7 @@ int range f0/21-22
  switchport trunk native vlan 5
  switchport trunk allowed vlan 5,50,60
  ip dhcp snooping trust
+ ip arp inspection trust
  switchport nonegotiate
 !
 int range f0/24, g0/1-2
@@ -97,7 +101,7 @@ int range f0/24, g0/1-2
 !
 int vlan 6
  ip add 172.20.11.105 255.255.255.248
-  ipv6 add 2001:b:0:7::1
+  ipv6 add 2001:b:0:7::1/64
  no shut
 !
 banner motd ^C SW1-PL(Authorized Access Only)^^C
@@ -112,3 +116,4 @@ line vty 0 15
  login local
  transport input ssh
 !
+do wr
