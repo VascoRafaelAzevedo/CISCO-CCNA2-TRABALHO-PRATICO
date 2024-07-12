@@ -1,181 +1,181 @@
-RT1-ZG
+    RT1-ZG
 
-Current configuration : 1660 bytes
-!
-version 15.1
-no service timestamps log datetime msec
-no service timestamps debug datetime msec
-service password-encryption
-!
-hostname RT1-Zg
-!
-login block-for 300 attempts 3 within 120
-!
-!
-enable secret classclass
-!
-!
-!
-!
-!
-!
-ip cef
-no ipv6 cef
-ipv6 unicast-routing
-!
-!
-!
-username cisco privilege 15 secret classclass
-!
-!
-license udi pid CISCO2911/K9 sn FTX15241T5I-
-!
-!
-!
-!
-!
-!
-!
-!
-!
-no ip domain-lookup
-ip domain-name isepacademy.ccna.itn.com
-crypto key generate rsa
-1024
-ip ssh version 2
-!
-!
-spanning-tree mode pvst
-!
-!
-!
-!
-!
-!
-interface GigabitEthernet0/0
- no shut
- description CONNECTION TO MLS1
- ip address 172.20.7.97 255.255.255.252
- ipv6 address FE80::1 link-local
- duplex auto
- speed auto
- 
-!
-interface GigabitEthernet0/1
- no shut
- description CONNECTION TO MLS2
- ip address 172.20.7.101 255.255.255.252
- ipv6 address FE80::3 link-local
- duplex auto
- speed auto
- 
-!
-interface GigabitEthernet0/2
- no shut
- ipv6 address FE80::7 link-local
- duplex auto
- speed auto
- 
-!
-interface GigabitEthernet0/2.102
- no shut
- description CONNECTION TO RT1-PL
- encapsulation dot1Q 102
- ip address 10.0.0.1 255.255.255.252
-!
-interface GigabitEthernet0/2.103
- no shut 
- description CONNECTION TO RT1-ST
- encapsulation dot1Q 103
- ip address 10.0.0.5 255.255.255.252
-!
-interface Vlan1
- no ip address
- shutdown
-!
-ip classless
-ip route 172.20.12.0 255.255.254.0 10.0.0.6 
-ip route 172.20.12.0 255.255.254.0 10.0.0.2 2
-ip route 172.20.8.0 255.255.252.0 10.0.0.2 
-ip route 172.20.8.0 255.255.252.0 10.0.0.6 2
-!
-!
-ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::8
-ipv6 route 2001:B::/61 GigabitEthernet0/1 FE80::9 
-ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::9 2
-ipv6 route 2001:B::/61 GigabitEthernet0/1 FE80::8 2
-!
-!IP ROUTES PARA VLANS E MLS
-!
-!MLS1
-ip route 172.20.7.64 255.255.255.224 172.20.7.98
-ip route 172.20.7.0  255.255.255.224 172.20.7.98
-ip route 172.20.7.32 255.255.255.224 172.20.7.98
-ip route 172.20.6.0  255.255.255.0   172.20.7.98
-ip route 172.20.4.0  255.255.255.0   172.20.7.98
-!
-ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::2 
-ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::2 
-ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::2 
-ipv6 route 2001:A::/64     GigabitEthernet0/0 FE80::2 
-ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::2 
-!
-ip route 172.20.2.0  255.255.254.0   172.20.7.98 2
-ip route 172.20.0.0  255.255.254.0   172.20.7.98 2
-ip route 172.20.5.0  255.255.255.0   172.20.7.98 2
-!
-ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::2  2
-ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::2  2
-ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::2  2
-!
-!MLS2
-ip route 172.20.7.64 255.255.255.224 172.20.7.102 2
-ip route 172.20.7.0   255.255.255.224 172.20.7.102 2
-ip route 172.20.7.32  255.255.255.224 172.20.7.102 2
-ip route 172.20.6.0   255.255.255.0   172.20.7.102 2
-ip route 172.20.4.0   255.255.255.0   172.20.7.102 2
-!
-ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::4 2
-ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::4 2
-ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::4 2
-ipv6 route 2001:A::/64     GigabitEthernet0/0 FE80::4 2 
-ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::4 2
-!
-ip route 172.20.2.0   255.255.254.0   172.20.7.102 
-ip route 172.20.0.0   255.255.254.0   172.20.7.102
-ip route 172.20.5.0   255.255.255.0   172.20.7.102
-!
-ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::4 2
-ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::4 2
-ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::4 2
-!
-ip flow-export version 9
-!
-!
-ip access-list extended sl_def_acl
- deny tcp any any eq telnet
- deny tcp any any eq www
- deny tcp any any eq 22
- permit tcp any any eq 22
-!
-banner motd ^CACESSO NAO AUTORIZADO PROIBIDO^C
-!
-!
-!
-!
-line con 0
- exec-timeout 0 30
- password 7 0822404F1A0A061B13181F
- login
-!
-line aux 0
-!
-line vty 0 4
- access-class 1 in
- exec-timeout 0 30
- login local
- transport input ssh
-!
-!
-!
-end4
+    Current configuration : 1660 bytes
+    !
+    version 15.1
+    no service timestamps log datetime msec
+    no service timestamps debug datetime msec
+    service password-encryption
+    !
+    hostname RT1-Zg
+    !
+    login block-for 300 attempts 3 within 120
+    !
+    !
+    enable secret classclass
+    !
+    !
+    !
+    !
+    !
+    !
+    ip cef
+    no ipv6 cef
+    ipv6 unicast-routing
+    !
+    !
+    !
+    username cisco privilege 15 secret classclass
+    !
+    !
+    license udi pid CISCO2911/K9 sn FTX15241T5I-
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    no ip domain-lookup
+    ip domain-name isepacademy.ccna.itn.com
+    crypto key generate rsa
+    1024
+    ip ssh version 2
+    !
+    !
+    spanning-tree mode pvst
+    !
+    !
+    !
+    !
+    !
+    !
+    interface GigabitEthernet0/0
+    no shut
+    description CONNECTION TO MLS1
+    ip address 172.20.7.97 255.255.255.252
+    ipv6 address FE80::1 link-local
+    duplex auto
+    speed auto
+    
+    !
+    interface GigabitEthernet0/1
+    no shut
+    description CONNECTION TO MLS2
+    ip address 172.20.7.101 255.255.255.252
+    ipv6 address FE80::3 link-local
+    duplex auto
+    speed auto
+    
+    !
+    interface GigabitEthernet0/2
+    no shut
+    ipv6 address FE80::7 link-local
+    duplex auto
+    speed auto
+    
+    !
+    interface GigabitEthernet0/2.102
+    no shut
+    description CONNECTION TO RT1-PL
+    encapsulation dot1Q 102
+    ip address 10.0.0.1 255.255.255.252
+    !
+    interface GigabitEthernet0/2.103
+    no shut 
+    description CONNECTION TO RT1-ST
+    encapsulation dot1Q 103
+    ip address 10.0.0.5 255.255.255.252
+    !
+    interface Vlan1
+    no ip address
+    shutdown
+    !
+    ip classless
+    ip route 172.20.12.0 255.255.254.0 10.0.0.6 
+    ip route 172.20.12.0 255.255.254.0 10.0.0.2 2
+    ip route 172.20.8.0 255.255.252.0 10.0.0.2 
+    ip route 172.20.8.0 255.255.252.0 10.0.0.6 2
+    !
+    !
+    ipv6 route 2001:C::/61 GigabitEthernet0/2 FE80::8
+    ipv6 route 2001:B::/61 GigabitEthernet0/2 FE80::9 
+    ipv6 route 2001:C::/61 GigabitEthernet0/2 FE80::9 2
+    ipv6 route 2001:B::/61 GigabitEthernet0/2 FE80::8 2
+    !
+    !IP ROUTES PARA VLANS E MLS
+    !
+    !MLS1
+    ip route 172.20.7.64 255.255.255.224 172.20.7.98
+    ip route 172.20.7.0  255.255.255.224 172.20.7.98
+    ip route 172.20.7.32 255.255.255.224 172.20.7.98
+    ip route 172.20.6.0  255.255.255.0   172.20.7.98
+    ip route 172.20.4.0  255.255.255.0   172.20.7.98
+    !
+    ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::2 
+    ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::2 
+    ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::2 
+    ipv6 route 2001:A::/64     GigabitEthernet0/0 FE80::2 
+    ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::2 
+    !
+    ip route 172.20.2.0  255.255.254.0   172.20.7.98 2
+    ip route 172.20.0.0  255.255.254.0   172.20.7.98 2
+    ip route 172.20.5.0  255.255.255.0   172.20.7.98 2
+    !
+    ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::2  2
+    ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::2  2
+    ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::2  2
+    !
+    !MLS2
+    ip route 172.20.7.64 255.255.255.224 172.20.7.102 2
+    ip route 172.20.7.0   255.255.255.224 172.20.7.102 2
+    ip route 172.20.7.32  255.255.255.224 172.20.7.102 2
+    ip route 172.20.6.0   255.255.255.0   172.20.7.102 2
+    ip route 172.20.4.0   255.255.255.0   172.20.7.102 2
+    !
+    ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::4 2
+    ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::4 2
+    ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::4 2
+    ipv6 route 2001:A::/64     GigabitEthernet0/0 FE80::4 2 
+    ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::4 2
+    !
+    ip route 172.20.2.0   255.255.254.0   172.20.7.102 
+    ip route 172.20.0.0   255.255.254.0   172.20.7.102
+    ip route 172.20.5.0   255.255.255.0   172.20.7.102
+    !
+    ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::4 
+    ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::4 
+    ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::4 
+    !
+    ip flow-export version 9
+    !
+    !
+    ip access-list extended sl_def_acl
+    deny tcp any any eq telnet
+    deny tcp any any eq www
+    deny tcp any any eq 22
+    permit tcp any any eq 22
+    !
+    banner motd ^CACESSO NAO AUTORIZADO PROIBIDO^C
+    !
+    !
+    !
+    !
+    line con 0
+    exec-timeout 0 30
+    password 7 0822404F1A0A061B13181F
+    login
+    !
+    line aux 0
+    !
+    line vty 0 4
+    access-class 1 in
+    exec-timeout 0 30
+    login local
+    transport input ssh
+    !
+    !
+    !
+    end
