@@ -162,7 +162,7 @@ switchport encapsulation dot1q
  switchport nonegotiate
  description EtherChannel
 !
-interface GigabitEthernet1/0/1
+interface GigabitEthernet0/1
  no switchport
  ip address 172.20.7.98 255.255.255.252
 ipv6 add fe80::2 link-local
@@ -170,15 +170,15 @@ ipv6 add fe80::2 link-local
  speed auto
  description To RT1-Zg 
 !
-interface GigabitEthernet1/0/2
+interface f0/2
  channel-group 1 mode on
   description To MLS2-Zg 
 !
-interface GigabitEthernet1/0/3
+interface f0/3
  channel-group 1 mode on
  description To MLS2-Zg 
 !
-interface GigabitEthernet1/0/4
+interface f0/4
 switchport encapsulation dot1q
  switchport trunk native vlan 7
  switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
@@ -186,7 +186,7 @@ switchport encapsulation dot1q
  switchport nonegotiate
  description To SW2-Zg 
 !
-interface GigabitEthernet1/0/5
+interface f0/5
 switchport encapsulation dot1qs
  switchport trunk native vlan 7
  switchport trunk allowed vlan 5,6,7,10,20,30,40,50,60
@@ -194,7 +194,7 @@ switchport encapsulation dot1qs
  switchport nonegotiate
  description To SW1-Zg 
 !
-int range g1/0/6-24, g1/1/1-4
+int range f0/6-24, g0/1-2
  description Closed
  switchport access vlan 99
  switchport mode access
