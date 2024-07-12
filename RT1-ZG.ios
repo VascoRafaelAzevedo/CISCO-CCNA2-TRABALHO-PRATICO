@@ -100,12 +100,6 @@ ip route 172.20.8.0 255.255.252.0 10.0.0.2
 ip route 172.20.8.0 255.255.252.0 10.0.0.6 2
 !
 !
-
-
-
-
-
-
 ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::8
 ipv6 route 2001:B::/61 GigabitEthernet0/1 FE80::9 
 ipv6 route 2001:C::/61 GigabitEthernet0/1 FE80::9 2
@@ -184,4 +178,4 @@ line vty 0 4
 !
 !
 !
-end
+end4
