@@ -1,0 +1,200 @@
+service password-encryption
+!
+hostname RT1-Zg
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$G32N$O9mBkE8EI7DFMDcI1UjOe/
+!
+no aaa new-model
+!
+memory-size iomem 5
+!
+ipv6 unicast-routing
+ipv6 cef
+ip source-route
+ip cef
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name isepacademy.ccna.itn.com
+login block-for 300 attempts 3 within 120
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+crypto pki token default removal timeout 0
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FCZ160220UG
+license accept end user agreement
+license boot module c2900 technology-package securityk9
+license boot module c2900 technology-package uck9
+!
+!
+username cisco privilege 15 secret 5 $1$NXnq$4gFSxvClgCRagvJh8MXDg0
+!
+redundancy
+!
+!
+!
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description CONNECTION TO MLS1
+ ip address 172.20.7.97 255.255.255.252
+ duplex auto
+ speed auto
+ ipv6 address FE80::1 link-local
+!
+interface GigabitEthernet0/1
+ description CONNECTION TO MLS2
+ ip address 172.20.7.101 255.255.255.252
+ duplex auto
+ speed auto
+ ipv6 address FE80::3 link-local
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address FE80::7 link-local
+!
+interface GigabitEthernet0/2.102
+ description CONNECTION TO RT1-PL
+ encapsulation dot1Q 102
+ ip address 10.0.0.1 255.255.255.252
+!
+interface GigabitEthernet0/2.103
+ description CONNECTION TO RT1-ST
+ encapsulation dot1Q 103
+ ip address 10.0.0.5 255.255.255.252
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+ip flow-export version 9
+!
+ip route 172.20.0.0 255.255.254.0 172.20.7.102
+ip route 172.20.0.0 255.255.254.0 172.20.7.98 2
+ip route 172.20.2.0 255.255.254.0 172.20.7.102
+ip route 172.20.2.0 255.255.254.0 172.20.7.98 2
+ip route 172.20.4.0 255.255.255.0 172.20.7.98
+ip route 172.20.4.0 255.255.255.0 172.20.7.102 2
+ip route 172.20.5.0 255.255.255.0 172.20.7.102
+ip route 172.20.5.0 255.255.255.0 172.20.7.98 2
+ip route 172.20.6.0 255.255.255.0 172.20.7.98
+ip route 172.20.6.0 255.255.255.0 172.20.7.102 2
+ip route 172.20.7.0 255.255.255.224 172.20.7.98
+ip route 172.20.7.0 255.255.255.224 172.20.7.102 2
+ip route 172.20.7.32 255.255.255.224 172.20.7.98
+ip route 172.20.7.32 255.255.255.224 172.20.7.102 2
+ip route 172.20.7.64 255.255.255.224 172.20.7.98
+ip route 172.20.7.64 255.255.255.224 172.20.7.102 2
+ip route 172.20.8.0 255.255.252.0 10.0.0.2
+ip route 172.20.8.0 255.255.252.0 10.0.0.6 2
+ip route 172.20.12.0 255.255.254.0 10.0.0.6
+ip route 172.20.12.0 255.255.254.0 10.0.0.2 2
+!
+!
+ipv6 route 2001:A::/64 GigabitEthernet0/0 FE80::2
+ipv6 route 2001:A::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::2
+ipv6 route 2001:A:0:1::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::2 2
+ipv6 route 2001:A:0:2::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::2 2
+ipv6 route 2001:A:0:3::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::2 2
+ipv6 route 2001:A:0:4::/64 GigabitEthernet0/1 FE80::4
+ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::2
+ipv6 route 2001:A:0:5::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::2
+ipv6 route 2001:A:0:6::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::2
+ipv6 route 2001:A:0:7::/64 GigabitEthernet0/0 FE80::4 2
+ipv6 route 2001:B::/61 GigabitEthernet0/2 FE80::9
+ipv6 route 2001:B::/61 GigabitEthernet0/2 FE80::8 2
+ipv6 route 2001:C::/61 GigabitEthernet0/2 FE80::8
+ipv6 route 2001:C::/61 GigabitEthernet0/2 FE80::9 2
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+banner motd ^CCACESSO NAO AUTORIZADO PROIBIDO^C
+!
+line con 0
+ exec-timeout 0 30
+ password 7 0822404F1A0A061B13181F
+ login
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport input all
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ access-class 1 in
+ exec-timeout 0 30
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+end

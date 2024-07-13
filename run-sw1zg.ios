@@ -1,0 +1,375 @@
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname SW1-Zg
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$xhGL$hzl5WXzpU.ioDct30kRNo/
+!
+username cisco password 7 094F42080A16141E0A1F17
+no aaa new-model
+system mtu routing 1500
+ip arp inspection vlan 10,20,30
+ip dhcp relay information trust-all
+!
+!
+ip dhcp snooping information option allow-untrusted
+ip dhcp snooping
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
+login block-for 300 attempts 3 within 120
+!
+!
+crypto pki trustpoint TP-self-signed-4226626688
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4226626688
+ revocation-check none
+ rsakeypair TP-self-signed-4226626688
+!
+!
+crypto pki certificate chain TP-self-signed-4226626688
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 34323236 36323636 3838301E 170D3933 30333031 30303031
+  30305A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 32323636
+  32363638 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100E990 925F19B1 A16925AB B7E163CD 52784E44 8D0DC025 269AF439 EFCB612D
+  9FA2592C FEA6FE3D 918B7142 44A9D875 76DF12A0 F7EF7DDA 1F58B177 483E2896
+  A4744266 B8596218 9E973136 0E3B642F C0F9597D 7D65A054 CF96F5D8 384D465B
+  E63B686B 216726C6 FCE15F62 059FC57D 9E4F8143 69BB24C8 43841D00 960C0CC9
+  9D710203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 142D6668 4EDE2BF0 7FDB7E04 5CE99BAF CAAF1461 30301D06
+  03551D0E 04160414 2D66684E DE2BF07F DB7E045C E99BAFCA AF146130 300D0609
+  2A864886 F70D0101 05050003 818100C4 33F7FDE0 D08E4402 731AD8EB 15C4BB51
+  F7D3670F 4B28E5BE 9B164696 4A071F26 8DF4D9DB 9B2940F5 8012FDDC D2B67DA9
+  D0F2A35B 81185A37 BA18FC42 8FA3CBCB FC3E2827 0FD378F9 893ACE58 A8C1B0BF
+  98712131 90650609 B86CB73E 099E4957 8FCCD8F6 2D444265 EE553634 90F248F1
+  0B49AC5B D2889D30 446DF449 279720
+        quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface FastEthernet0/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface FastEthernet0/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface FastEthernet0/4
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface FastEthernet0/5
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface FastEthernet0/6
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/7
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/8
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/9
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/10
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/11
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/12
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/13
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/14
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/15
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/16
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/17
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/18
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/19
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/20
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ ip arp inspection trust
+ spanning-tree portfast
+ ip dhcp snooping trust
+!
+interface FastEthernet0/21
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ shutdown
+ ip dhcp snooping limit rate 5
+!
+interface FastEthernet0/22
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ shutdown
+ ip dhcp snooping limit rate 5
+!
+interface FastEthernet0/23
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ shutdown
+ ip dhcp snooping limit rate 5
+!
+interface FastEthernet0/24
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ shutdown
+ ip dhcp snooping limit rate 5
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan6
+ ip address 172.20.7.27 255.255.255.224
+ ipv6 address 2001:A:0:5::1/64
+ ipv6 enable
+!
+ip default-gateway 172.20.7.30
+ip http server
+ip http secure-server
+!
+!
+!
+vstack
+banner motd ^CC SW1-ZG(Authorized Access Only)^C
+!
+line con 0
+ exec-timeout 0 30
+ password 7 1511070D17392828292026
+ login
+line vty 0 4
+ exec-timeout 0 30
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 0 30
+ login local
+ transport input ssh
+!
+end

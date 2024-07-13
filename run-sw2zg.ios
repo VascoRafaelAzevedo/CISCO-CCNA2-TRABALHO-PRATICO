@@ -1,0 +1,260 @@
+service password-encryption
+!
+hostname SW2-Zg
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$rMBZ$1mFzmyS0dEuKbf7Nn3F9q1
+!
+username cisco password 7 0307570A151C22404F1A0A
+no aaa new-model
+system mtu routing 1500
+ip arp inspection vlan 10,20,30
+ip dhcp relay information trust-all
+!
+!
+ip dhcp snooping information option allow-untrusted
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
+login block-for 300 attempts 3 within 120
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 30
+ switchport mode access
+ switchport voice vlan 40
+ ip arp inspection trust
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport trunk native vlan 5
+ switchport trunk allowed vlan 5,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface FastEthernet0/22
+ switchport trunk native vlan 5
+ switchport trunk allowed vlan 5,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface FastEthernet0/23
+ switchport trunk native vlan 6
+ switchport trunk allowed vlan 5,6,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface FastEthernet0/24
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 5
+ switchport port-security aging time 5
+ switchport port-security
+ shutdown
+ ip dhcp snooping limit rate 5
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface GigabitEthernet0/2
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan6
+ ip address 172.20.7.26 255.255.255.224
+ ipv6 address 2001:A:0:5::2/64
+ ipv6 enable
+!
+ip default-gateway 172.20.7.30
+ip http server
+ip http secure-server
+!
+!
+!
+vstack
+banner motd ^CC SW2-ZG(Authorized Access Only)^C
+!
+line con 0
+ exec-timeout 0 30
+ password 7 104D0518160411070D1739
+ login
+line vty 0 4
+ exec-timeout 0 30
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 0 30
+ login local
+ transport input ssh
+!
+end

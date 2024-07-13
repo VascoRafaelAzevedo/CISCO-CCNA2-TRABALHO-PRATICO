@@ -1,0 +1,11 @@
+ip host RT1-Zg 172.20.7.97
+ip host SW1-Zg 172.20.7.27
+ip host SW2-Zg 172.20.7.26
+ip host MLS1-Zg 172.20.7.28
+ip host MLS2-Zg 172.20.7.29
+ip host DHCP-SRV 172.20.7.33
+ip host RT1-Pl 172.20.11.110
+ip host SW1-PI 172.20.11.105
+ip host RT1-St 172.20.13.238
+ip host SW1-St 172.20.13.233
+

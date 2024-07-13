@@ -1,0 +1,360 @@
+service password-encryption
+!
+hostname MLS2-Zg
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$v5mu$E84OjqVN0A59lErgRCaHJ1
+!
+username cisco password 7 110A150404010800053938
+!
+!
+no aaa new-model
+system mtu routing 1500
+ip routing
+no ip domain-lookup
+ip domain-name isepacademy.ccna.itn.com
+ip host MLS1-Zg 172.20.7.98
+ip host RT1-Zg 172.20.7.101
+ip dhcp relay information trust-all
+!
+!
+ip dhcp snooping information option allow-untrusted
+login block-for 300 attempts 3 within 120
+ipv6 unicast-routing
+!
+!
+crypto pki trustpoint TP-self-signed-2893469056
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2893469056
+ revocation-check none
+ rsakeypair TP-self-signed-2893469056
+!
+!
+crypto pki certificate chain TP-self-signed-2893469056
+ certificate self-signed 01
+  3082023F 308201A8 A0030201 02020101 300D0609 2A864886 F70D0101 04050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 32383933 34363930 3536301E 170D3933 30333031 30303031
+  30325A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 38393334
+  36393035 3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100C79C D3A089C7 C791A05D BA47E58A 9087BA23 B7354F1B 22285BBF 80BED687
+  42796A99 1FFF0147 987A357F 30521116 62B8944D A511E65A 2BFA176A 2F0DD16E
+  9A2DC364 C288F9A1 80C6617D 19FFC992 9DA6DF65 12AEEE43 2688DC5C 91277528
+  BC84BC63 D33EEA5C 5C96885C BB3A16C1 0D53AA5D B241EABE 4B04C38C 70E55C1C
+  82650203 010001A3 67306530 0F060355 1D130101 FF040530 030101FF 30120603
+  551D1104 0B300982 07537769 7463682E 301F0603 551D2304 18301680 1432B262
+  CEFA750B 7BD9C59D 3A8C67C9 64551249 35301D06 03551D0E 04160414 32B262CE
+  FA750B7B D9C59D3A 8C67C964 55124935 300D0609 2A864886 F70D0101 04050003
+  81810029 2D08A930 FE1FF94D D38CB687 07C306D8 B52527B9 C1F1AFD6 12595928
+  768031B9 89DD787E 94871FA5 DF1878E0 8CA0F224 CAFCAD9F C26AFBF9 84542689
+  A7C191D1 C22FC65B 3EC6823F F65957D6 6025E733 109C8F62 C3860A7D 777D31A7
+  9C2F3D14 7A3AE126 B2C8B130 3AFE04C6 68ABF9CB 0ECA009D A2A1DE7B F6E0B6C5 E03D0A
+  quit
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+spanning-tree vlan 5-6,10,20,30 priority 24576
+spanning-tree vlan 40,50,60 priority 28672
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!
+interface Port-channel1
+ description EtherChannel
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/1
+ description To RT1-Zg
+ no switchport
+ ip address 172.20.7.102 255.255.255.252
+!
+interface FastEthernet0/2
+ description To MLS1-Zg
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ channel-group 1 mode on
+!
+interface FastEthernet0/3
+ description To MLS1-Zg
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+ channel-group 1 mode on
+!
+interface FastEthernet0/4
+ description To SW1-Zg
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/5
+ description To SW2-Zg
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5-7,10,20,30,40,50,60
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/6
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/7
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/8
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/9
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/10
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/11
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/12
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/13
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/14
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/15
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/16
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/17
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/18
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/19
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/20
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/21
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/22
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/23
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/24
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet0/1
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet0/2
+ description Closed
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan5
+ description VLAN APs
+ ip address 172.20.7.93 255.255.255.224
+ ip helper-address 172.20.7.33
+ ipv6 address 2001:A:0:7::2/64
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 5 ip 172.20.7.94
+!
+interface Vlan6
+ description VLAN MANAGEMENT
+ ip address 172.20.7.29 255.255.255.224
+ ip helper-address 172.20.7.33
+ ipv6 address 2001:A:0:5::5/64
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 6 ip 172.20.7.30
+!
+interface Vlan10
+ description VLAN SERVERS
+ ip address 172.20.7.61 255.255.255.224
+ ip helper-address 172.20.7.33
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 10 ip 172.20.7.62
+!
+interface Vlan20
+ description VLAN ADMINISTRATION
+ ip address 172.20.6.253 255.255.255.0
+ ip helper-address 172.20.7.33
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 20 ip 172.20.6.254
+!
+interface Vlan30
+ description VLAN STAFF
+ ip address 172.20.4.253 255.255.255.0
+ ip helper-address 172.20.7.33
+ ipv6 address 2001:A:0:1::2/64
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 30 ip 172.20.4.254
+!
+interface Vlan40
+ description VLAN VOIP
+ ip address 172.20.3.253 255.255.254.0
+ ip helper-address 172.20.7.33
+ ipv6 address 2001:A:0:2::2/64
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 40 ip 172.20.3.254
+ standby 40 priority 110
+ standby 40 preempt
+!
+interface Vlan50
+ description VLAN WIRELESS
+ ip address 172.20.1.253 255.255.254.0
+ ip helper-address 172.20.7.33
+ ipv6 address 2001:A:0:3::2/64
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 50 ip 172.20.1.254
+ standby 50 priority 110
+ standby 50 preempt
+!
+interface Vlan60
+ description VLAN GUESTS
+ ip address 172.20.5.253 255.255.255.0
+ ip helper-address 172.20.7.33
+ ipv6 address 2001:A:0:4::2/64
+ ipv6 enable
+ ipv6 dhcp relay destination 2001:A:0:6::4
+ standby version 2
+ standby 60 ip 172.20.5.254
+ standby 60 priority 110
+ standby 60 preempt
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 172.20.7.101
+ip http server
+ip http secure-server
+!
+!
+!
+!
+!
+!
+vstack
+banner motd ^CC MLS2-ZG(Authorized Access Only)^C
+!
+line con 0
+ exec-timeout 0 30
+ password 7 104D0518160411070D1739
+ login
+line vty 0 4
+ exec-timeout 0 30
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 0 30
+ login local
+ transport input ssh
+!
+end

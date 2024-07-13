@@ -162,7 +162,7 @@ switchport encapsulation dot1q
  switchport nonegotiate
  description EtherChannel
 !
-interface GigabitEthernet0/1
+interface f0/1
  no switchport
  ip address 172.20.7.98 255.255.255.252
 ipv6 add fe80::2 link-local

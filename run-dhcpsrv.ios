@@ -1,0 +1,182 @@
+service password-encryption
+!
+hostname DHCP-SRV
+!
+boot-start-marker
+boot-end-marker
+!
+!
+security passwords min-length 10
+enable secret 5 $1$mERr$UIEd/gKB8Xu9v11aSkZ1n0
+!
+no aaa new-model
+!
+memory-size iomem 5
+!
+dot11 syslog
+ip source-route
+!
+!
+ip cef
+!
+!
+ip dhcp pool VLAN20
+ network 172.20.6.0 255.255.255.0
+ default-router 172.20.6.254
+!
+ip dhcp pool VLAN30
+ network 172.20.4.0 255.255.255.0
+ default-router 172.20.4.254
+!
+ip dhcp pool VLAN40
+ network 172.20.2.0 255.255.254.0
+ default-router 172.20.3.254
+!
+ip dhcp pool VLAN50
+ network 172.20.0.0 255.255.254.0
+ default-router 172.20.1.254
+!
+ip dhcp pool VLAN60
+ network 172.20.5.0 255.255.255.0
+ default-router 172.20.5.254
+!
+!
+no ip domain lookup
+ip domain name isepacademy.ccna.itn.com
+login block-for 300 attempts 3 within 120
+no ipv6 cef
+ipv6 dhcp pool VLAN20_IPV6
+ address prefix 2001:A::/64
+ domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN30_IPV6
+ address prefix 2001:A:0:1::/64
+ domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN40_IPV6
+ address prefix 2001:A:0:2::/64
+ domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN50_IPV6
+ address prefix 2001:A:0:3::/64
+ domain-name isepacademy.ccna.itn.com
+!
+ipv6 dhcp pool VLAN60_IPV6
+ address prefix 2001:A:0:4::/64
+ domain-name isepacademy.ccna.itn.com
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2851 sn FCZ12097171
+username cisco privilege 15 secret 5 $1$mERr$UIEd/gKB8Xu9v11aSkZ1n0
+!
+redundancy
+!
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.20.7.33 255.255.255.224
+ duplex auto
+ speed auto
+ ipv6 address 2001:A:0:6::4/64
+ ipv6 enable
+ ipv6 nd prefix default 2592000 604800 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 dhcp server VLAN60_IPV6
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/2/0
+ no ip address
+ shutdown
+ clock rate 125000
+!
+interface Serial0/2/1
+ no ip address
+ shutdown
+ clock rate 125000
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+ip flow-export version 9
+!
+ip route 0.0.0.0 0.0.0.0 172.20.7.62
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+banner motd ^CC APENAS ACCESSO AUTORIZADO ^C
+!
+line con 0
+ password 7 0822404F1A0A061B13181F
+ login
+line aux 0
+line vty 0 4
+ exec-timeout 0 30
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 0 30
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+end
